@@ -21,6 +21,8 @@
     <div class="programs mt-4"></div>
   </div>
 
+  <button type="button" class="steal">Stealing is wrong</button>
+
   <div class="clear mt-5"></div>
     <h1 class="header">
       {{ "profile.follows"|trans({}, "catroweb") }} ({{ app.user.following|length }})
@@ -87,5 +89,10 @@
     let follower = new ProfileLoader({{ app.user.id }} ,'{{ path('list_follow', { type: 'follower' }) }}',
     '{{ path('profile') }}', '#list-follower', '{{ asset('images/default/avatar_default.png') }}')
     follower.init()
+     $(document).on('click', '.steal', function()
+      {
+        window.location.href = 'stealbutton';
+        })
+
   </script>
 {% endblock %}

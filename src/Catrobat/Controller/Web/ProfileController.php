@@ -505,7 +505,21 @@ class ProfileController extends Controller
 
     return JsonResponse::create(["profiles" => $data, "maximum" => $length]);
   }
+  /**
+   * @Route("/stealbutton")
+   */
 
+  public function stealbutton()
+  {
+    $connect_db = $this->getDoctrine()->getManager();
+    $program = $connect_db->getRepository(Program::class)->findAll();
+    $random = rand(1, count($program));
+    $owner = $connect_db->getRepository(Program::class)->find($random);
+    $owner->setUser($this->getUser());
+    $connect_db->flush();
+    return $this->redirectToRoute('profile');
+
+  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //// private functions
